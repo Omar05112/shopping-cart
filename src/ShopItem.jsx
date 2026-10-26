@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function ShopItem({ image, id, title, price }) {
+function ShopItem({ image, id, title, price, setAmountValue }) {
   const [amount, setAmount] = useState(0);
 
   function handleIncrease() {
@@ -27,7 +27,11 @@ function ShopItem({ image, id, title, price }) {
         <div>{amount}</div>
         <button onClick={() => handleIncrease()}>+</button>
       </div>
-      <button onClick={() => localStorage.setItem(id, amount)}>
+      <button
+        onClick={() => {
+          setAmountValue(amount);
+        }}
+      >
         Add to Cart
       </button>
     </>

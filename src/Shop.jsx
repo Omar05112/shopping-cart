@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import ShopItem from "./ShopItem";
+import ShopItem from "./ShopItem.jsx";
 
-function Shop() {
+function Shop({ setAmountValue }) {
   const [stuff, setStuff] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,10 +23,12 @@ function Shop() {
       {stuff.map((item) => {
         return (
           <ShopItem
+            key={item.id}
             image={item.image}
             id={item.id}
             title={item.title}
             price={item.price}
+            setAmountValue={setAmountValue}
           />
         );
       })}
