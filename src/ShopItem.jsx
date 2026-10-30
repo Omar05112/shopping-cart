@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function ShopItem({ image, id, title, price, setAmountValue }) {
+function ShopItem({ image, id, title, price, setCartItems }) {
   const [amount, setAmount] = useState(0);
 
   function handleIncrease() {
@@ -29,7 +29,7 @@ function ShopItem({ image, id, title, price, setAmountValue }) {
       </div>
       <button
         onClick={() => {
-          setAmountValue(amount);
+          setCartItems(image, amount, title, price, id);
         }}
       >
         Add to Cart

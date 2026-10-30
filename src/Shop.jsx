@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ShopItem from "./ShopItem.jsx";
 
-function Shop({ setAmountValue }) {
+function Shop({ setCartItems }) {
   const [stuff, setStuff] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,7 +28,7 @@ function Shop({ setAmountValue }) {
             id={item.id}
             title={item.title}
             price={item.price}
-            setAmountValue={setAmountValue}
+            setCartItems={setCartItems}
           />
         );
       })}
