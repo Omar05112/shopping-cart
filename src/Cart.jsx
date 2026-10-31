@@ -1,15 +1,32 @@
-function Cart({ cartItems }) {
+import CartItem from "./CartItem";
+
+function Cart({ cartItems, handleDelete}) {
   return (
     <>
-      {cartItems.map((item) => {
-        return (
-          <div>
-            Image: <img src={item.image} width="100" height="100" />
-            Title: {item.title}, ID: {item.id}, Amount: {item.amount}, Total
-            Price: {item.total_price}
-          </div>
-        );
-      })}
+      {cartItems.length === 0 ? (
+        <div>There are no items in your cart</div>
+      ) : (
+        <>
+          {cartItems.map((item) => {
+            return (
+              <CartItem
+                image={item.image}
+                title={item.title}
+                id={item.id}
+                amount={item.amount}
+                total_price={item.total_price}
+                handleDelete={handleDelete}
+              />
+            );
+          })}
+          <h1>
+            Total price:{" "}
+            {cartItems.reduce((a, b) => {
+              return a + b.total_price;
+            }, 0)}
+          </h1>
+        </>
+      )}
     </>
   );
 }

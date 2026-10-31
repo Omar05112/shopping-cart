@@ -8,6 +8,20 @@ import { useEffect, useState } from "react";
 function App() {
   const { name } = useParams();
   const [cartItems, setCartItems] = useState([]);
+  const reduced = cartItems.reduce((a, b) => {
+    return a + b.amount;
+  }, 0);
+
+  const handleDelete = (id) => {
+    const found = cartItems.find((element) => element.id === id);
+    const temp = cartItems.slice();
+    if (found) {
+      temp.splice(temp.indexOf(found), 1);
+      setCartItems(temp);
+    }
+
+    console.log(temp);
+  };
 
   console.log(cartItems);
 
@@ -23,17 +37,11 @@ function App() {
           <Link to="/shop">Shop</Link>
         </li>
         <li>
-          <Link to="/cart">
-            Cart (
-            {cartItems.reduce((a, b) => {
-              return a + b.amount;
-            }, 0)}
-            )
-          </Link>
+          <Link to="/cart">Cart ({reduced})</Link>
         </li>
       </nav>
       {name === "cart" ? (
-        <Cart cartItems={cartItems} />
+        <Cart cartItems={cartItems} handleDelete={handleDelete} />
       ) : name === "shop" ? (
         <Shop
           setCartItems={(image, amountValue, title, price, id) => {
